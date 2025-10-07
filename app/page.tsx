@@ -5,11 +5,14 @@ import { Input } from "./_components/ui/input"
 import Image from "next/image"
 import { Card, CardContent } from "./_components/ui/card"
 import { Badge } from "./_components/ui/badge"
-import { Avatar } from "./_components/ui/avatar"
-import { AvatarImage } from "./_components/ui/avatar"
+import { Avatar, AvatarImage } from "./_components/ui/avatar"
+import BarbershopItem from "./_components/barbershoping-item"
+import { db } from "./_lib/prisma"
 
 //SERVER COMPONENTS
-const Home = () => {
+const Home = async () => {
+  //Chamar o meu Banco de dados
+  const barbershops = await db.barbershop.findMany({})
   return (
     <div>
       {/*Header*/}
@@ -19,7 +22,7 @@ const Home = () => {
         <p>Segunda-Feira, 06 de Outubro.</p>
 
         <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Pesquisar serviços ou profissionais" />
+          <Input placeholder="Pesquisar serviços ou profissionais..." />
           <Button>
             <SearchIcon />
           </Button>
@@ -28,6 +31,9 @@ const Home = () => {
         <div className="relative mt-6 w-full h-[150px]">
           <Image alt="Agende nos melhores com FSW Barber" src="/banner-01.png" fill className="object-cover rounded-xl" />
         </div>
+
+        {/*AGENDAMENTOS*/}
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Próximos Agendamentos</h2>
 
         <Card className="mt-6">
           <CardContent className="flex justify-between p-0">
@@ -52,6 +58,13 @@ const Home = () => {
             </div>
           </CardContent>
         </Card>
+
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Barbearias</h2>
+          <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+            {barbershops.map((barbershop) => (
+              <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+            ))}
+          </div>
       </div>
     </div>
   )
