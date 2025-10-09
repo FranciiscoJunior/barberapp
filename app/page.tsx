@@ -37,7 +37,7 @@ const Home = async () => {
         {/*BUSCA RÁPIDA*/}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
-            <Button className="gap-2" variant="secondary" key={option.title}>
+            <Button className="gap-2" key={option.title}>
               <Image src={option.imageUrl} width={16} height={16} alt={option.title}/>
               {option.title}
             </Button>
@@ -49,7 +49,6 @@ const Home = async () => {
         </div>
 
         {/*AGENDAMENTOS*/}
-
         <BookingItem />
 
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Recomendados</h2>
