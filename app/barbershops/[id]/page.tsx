@@ -18,6 +18,9 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
         where: {
             id: params.id,
         },
+        include: {
+            services: true
+        },
     })
 
     //Se não encontrar a barbearia, redireciona para a página 404, notFound impede erro no TypeScript
