@@ -3,7 +3,6 @@ import Header from "./_components/header"
 import { Button } from "flowbite-react"
 import { Input } from "./_components/ui/input"
 import Image from "next/image"
-import { Card, CardContent } from "./_components/ui/card"
 import BarbershopItem from "./_components/barbershoping-item"
 import { db } from "./_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
@@ -79,18 +78,6 @@ const Home = async () => {
           ))}
         </div>
       </div>
-
-      {/*Footer*/}
-      <footer>
-        <Card>
-          <CardContent className="px-5 py-6">
-            <p className="text-sm text-gray-500">
-              Desenvolvido por Francisco Júnior -{" "}
-              <span className="font-semibold">FSW Barber &copy; 2025</span>
-            </p>
-          </CardContent>
-        </Card>
-      </footer>
     </div>
   )
 }
