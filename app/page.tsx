@@ -7,7 +7,6 @@ import { Card, CardContent } from "./_components/ui/card"
 import BarbershopItem from "./_components/barbershoping-item"
 import { db } from "./_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
-import BookingItem from "./_components/booking-item"
 
 //SERVER COMPONENTS
 const Home = async () => {
@@ -38,40 +37,57 @@ const Home = async () => {
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
             <Button className="gap-2" key={option.title}>
-              <Image src={option.imageUrl} width={16} height={16} alt={option.title}/>
+              <Image
+                src={option.imageUrl}
+                width={16}
+                height={16}
+                alt={option.title}
+              />
               {option.title}
             </Button>
           ))}
         </div>
 
-        <div className="relative mt-6 w-full h-[150px]">
-          <Image alt="Agende nos melhores com FSW Barber" src="/banner-01.png" fill className="object-cover rounded-xl" />
+        <div className="relative mt-6 h-[150px] w-full">
+          <Image
+            alt="Agende nos melhores com FSW Barber"
+            src="/banner-01.png"
+            fill
+            className="rounded-xl object-cover"
+          />
         </div>
 
         {/*AGENDAMENTOS*/}
-        <BookingItem />
 
-        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Recomendados</h2>
-          <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-            {barbershops.map((barbershop) => (
-              <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-            ))}
-          </div>
+        {/*< BookingItem />*/}
 
-          <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">Populares</h2>
-          <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-            {popularBarbershops.map((barbershop) => (
-              <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-            ))}
-          </div>
+        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
+          Recomendados
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
 
+        <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarbershops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
       </div>
 
       {/*Footer*/}
       <footer>
         <Card>
           <CardContent className="px-5 py-6">
-            <p className="text-sm text-gray-500">Desenvolvido por Francisco Júnior - <span className="font-semibold">FSW Barber &copy; 2025</span></p>
+            <p className="text-sm text-gray-500">
+              Desenvolvido por Francisco Júnior -{" "}
+              <span className="font-semibold">FSW Barber &copy; 2025</span>
+            </p>
           </CardContent>
         </Card>
       </footer>

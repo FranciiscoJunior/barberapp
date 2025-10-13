@@ -1,17 +1,16 @@
-import { Barbershop } from "@prisma/client"
 import { Card, CardContent } from "./ui/card"
 import Image from "next/image"
 import { Button } from "./ui/button"
 import { Badge } from "./ui/badge"
 import { StarIcon } from "lucide-react"
 import Link from "next/link"
-
+import { Barbershop } from "@prisma/client"
 interface BarbershopItemProps {
-    barbershop: Barbershop
+  barbershop: Barbershop
 }
 
 const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
-return (
+  return (
     <Card className="min-w-[167px] rounded-2xl">
       <CardContent className="p-0 px-1 pt-1">
         {/* IMAGEM */}
@@ -24,7 +23,7 @@ return (
           />
 
           <Badge
-            className="absolute left-2 top-2 space-x-1"
+            className="absolute top-2 left-2 space-x-1"
             variant="secondary"
           >
             <StarIcon size={12} className="fill-primary text-primary" />
