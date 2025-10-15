@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "./ui/button"
 import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react"
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
@@ -12,8 +14,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog"
+import { signIn, signOut, useSession } from "next-auth/react"
+import { Avatar, AvatarImage } from "./ui/avatar"
 
 const SidebarButton = () => {
+  const { data } = useSession()
+  const handleLoginWidthGoogleClick = signIn("google")
+  const handleLogoutClick = () => signOut()
+
+  console.log(data?.user)
+
   return (
     <SheetContent className="overflow-y-auto">
       <SheetHeader>
@@ -21,46 +31,56 @@ const SidebarButton = () => {
       </SheetHeader>
 
       <div className="flex items-center justify-between border-b border-solid py-5">
-        <h2 className="font-bold">Olá, faça seu login!</h2>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="icon">
-              <LogInIcon />
-            </Button>
-          </DialogTrigger>
+        {data?.user ? (
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage
+                src={data?.user?.image ?? ""}
+                height={18}
+                width={18}
+              />
+            </Avatar>
 
-          <DialogContent className="w-[90%]">
-            <DialogHeader>
-              <DialogTitle>Faça seu login da plataforma</DialogTitle>
-              <DialogDescription>
-                Conecte-se com sua conta do Google.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
+            <div>
+              <p className="font-bold">{data.user.name}</p>
+              <p className="text-xs">{data.user.email}</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="icon">
+                  <LogInIcon />
+                </Button>
+              </DialogTrigger>
 
-          <Button variant="outline" className="gap-1 font-bold">
-            <Image
-              src="/public/google.svg"
-              width={18}
-              height={18}
-              alt="login com as contas google"
-            />
-            Google
-          </Button>
-        </Dialog>
+              <DialogContent className="w-[90%]">
+                <DialogHeader>
+                  <DialogTitle>Faça seu login na plataforma</DialogTitle>
 
-        {/* <Avatar>
-          <AvatarImage
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.1.
-              0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400"
-            alt="User Avatar"
-          />
-        </Avatar>
+                  <DialogDescription>
+                    Conecte-se com uma conta do Google
+                  </DialogDescription>
+                </DialogHeader>
 
-        <div>
-          <p className="font-bold">Francisco Júnior</p>
-          <p className="text-xs">franciscojunior@gmail.com</p>
-        </div>*/}
+                <Button
+                  variant="outline"
+                  className="gap-1 font-bold"
+                  onClick={handleLoginWidthGoogleClick}
+                >
+                  <Image
+                    alt="Faxer login com Google"
+                    src="/public/google.svg"
+                    width={18}
+                    height={18}
+                  />
+                  Google
+                </Button>
+              </DialogContent>
+            </Dialog>
+          </>
+        )}
       </div>
 
       <div className="flex flex-col gap-2 border-6 border-b py-5">
@@ -95,7 +115,12 @@ const SidebarButton = () => {
       </div>
 
       <div className="flex flex-col gap-2 py-5">
-        <Button variant="ghost" className="justify-start" gap-2>
+        <Button
+          variant="ghost"
+          className="justify-start"
+          gap-2
+          onClick={handleLogoutClick}
+        >
           {" "}
           <LogOutIcon size={18} /> Sair da Conta
         </Button>
