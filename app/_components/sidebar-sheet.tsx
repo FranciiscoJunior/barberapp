@@ -2,10 +2,9 @@ import { Button } from "./ui/button"
 import { CalendarIcon, HomeIcon, LogOutIcon } from "lucide-react"
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
 import { quickSearchOptions } from "../_constants/search"
-import { Avatar } from "flowbite-react"
-import { AvatarImage } from "@radix-ui/react-avatar"
 import Link from "next/link"
 import Image from "next/image"
+import { Avatar, AvatarImage } from "./ui/avatar"
 
 const SidebarButton = () => {
   return (
@@ -18,7 +17,7 @@ const SidebarButton = () => {
         <Avatar>
           <AvatarImage
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.1.
-                            0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400"
+              0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400"
             alt="User Avatar"
           />
         </Avatar>
