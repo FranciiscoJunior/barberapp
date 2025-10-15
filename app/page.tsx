@@ -1,11 +1,10 @@
-import { SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "flowbite-react"
-import { Input } from "./_components/ui/input"
 import Image from "next/image"
 import BarbershopItem from "./_components/barbershoping-item"
 import { db } from "./_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
+import Search from "./_components/search"
 
 //SERVER COMPONENTS
 const Home = async () => {
@@ -21,15 +20,13 @@ const Home = async () => {
       {/*Header*/}
       <Header />
       <div className="p-5">
+        {/*Texto*/}
         <h2 className="text-xl font-bold">Olá, Francisco Júnior!</h2>
         <p>Segunda-Feira, 06 de Outubro.</p>
 
         {/*BUSCA*/}
-        <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Pesquisar serviços ou profissionais..." />
-          <Button>
-            <SearchIcon />
-          </Button>
+        <div className="mt-6">
+          <Search />
         </div>
 
         {/*BUSCA RÁPIDA*/}
