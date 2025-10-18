@@ -15,7 +15,7 @@ import {
 import { Calendar } from "lucide-react"
 import { ptBR } from "date-fns/locale"
 import { useEffect, useState } from "react"
-import { addDays, format, set } from "date-fns"
+import { format, set } from "date-fns"
 import { createBooking } from "../_actions/create-booking"
 import { useSession } from "next-auth/react"
 import { toast } from "sonner"
@@ -50,6 +50,7 @@ const TIME_LIST = [
 ]
 
 const getTimeList = (bookings: Booking[]) => {
+  //Não exibir horários no passado
   return TIME_LIST.filter((time) => {
     const hour = Number(time.split(":")[0])
     const minutes = Number(time.split(":")[1])
@@ -69,6 +70,7 @@ const getTimeList = (bookings: Booking[]) => {
 }
 
 const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
+  const [signInDialogIsOpen, setSignInDialogIsOpen] = useState(false)
   const { data } = useSession()
   const [selectedDay, setSelectedSay] = useState<Date | undefined>(undefined)
   const [selectedTime, setSelectedTime] = useState<string | undefined>(
@@ -87,7 +89,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       })
       setDayBookings(bookings)
     }
-    console.log("useEffect")
     fetch()
   }, [selectedDay, service.id])
 
@@ -97,8 +98,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
     setDayBookings([])
     setBookingSheetIsOpen(false)
   }
-
-  console.log({ dayBookings })
 
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedSay(date)
@@ -158,6 +157,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                 currency: "BRL",
               }).format(Number(service.price))}
             </p>
+
             <Sheet
               open={bookingSheetIsOpen}
               onOpenChange={handleBookingSheetOpenChange}
@@ -181,7 +181,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     locale={ptBR}
                     selected={selectedDay}
                     onSelect={handleDateSelect}
-                    fromDate={addDays(new Date(), 1)}
+                    fromDate={new Date()}
                     style={{
                       head_cell: {
                         width: "100%",
