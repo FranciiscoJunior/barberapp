@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use sever"
+"use server"
 
 import { revalidatePath } from "next/cache"
 import { db } from "../_lib/prisma"
@@ -20,4 +20,5 @@ export const createBooking = async (params: CreateBookingParams) => {
     data: { ...params, userId: (user.user as any).id },
   })
   revalidatePath("/barbershops/[id]")
+  revalidatePath("/bookings")
 }
