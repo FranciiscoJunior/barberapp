@@ -14,7 +14,7 @@ import {
 } from "./ui/sheet"
 import { Calendar } from "lucide-react"
 import { ptBR } from "date-fns/locale"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { format, isPast, isToday, set } from "date-fns"
 import { createBooking } from "../_actions/create-booking"
 import { useSession } from "next-auth/react"
@@ -200,7 +200,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     selected={selectedDay}
                     onSelect={handleDateSelect}
                     fromDate={new Date()}
-                    style={{
+                    styles={{
                       head_cell: {
                         width: "100%",
                         textTransform: "capitalize",
