@@ -21,7 +21,6 @@ import { Button } from "flowbite-react"
 import { Dialog, DialogFooter } from "./ui/dialog"
 import { DialogClose } from "@radix-ui/react-dialog"
 import {
-  AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
